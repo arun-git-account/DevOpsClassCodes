@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building ..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing ..'
+                script {
+                   println("Hello world")
+                   def output = sh(script: 'docker run hello-world;docker ps -a', returnStdout: true).trim()
+                   println "Output: ${output}"
+                }
+            }
+        }   
+        stage('Deploy') {
+            steps {
+                echo 'Deploying ..'
+            }
+        }           
+    }
+}
+    
